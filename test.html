@@ -1,0 +1,1476 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f2e9" />
+    <title>Lumière & son — Leçon et exercices</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --paper: #f4f2e9;
+        --ink: #202b35;
+        --blue: #244ad7;
+        --lime: #d6ed74;
+        --muted: #626d75;
+        --line: #d3d6cd;
+        --white: #fffef9;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 30px;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.7;
+      }
+      button,
+      a,
+      input,
+      summary {
+        -webkit-tap-highlight-color: transparent;
+      }
+      a {
+        color: inherit;
+      }
+      button,
+      input {
+        font: inherit;
+      }
+      button {
+        cursor: pointer;
+      }
+      :focus-visible {
+        outline: 3px solid var(--blue);
+        outline-offset: 5px;
+      }
+      .wrap {
+        width: min(1160px, calc(100% - 48px));
+        margin: auto;
+      }
+      header {
+        border-bottom: 1px solid var(--line);
+      }
+      .topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 24px 0;
+      }
+      .brand {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -1px;
+        text-decoration: none;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .brand-symbol {
+        height: 27px;
+        width: 27px;
+        background: var(--blue);
+        border-radius: 50%;
+        position: relative;
+      }
+      .brand-symbol:after {
+        content: "";
+        position: absolute;
+        background: var(--lime);
+        height: 7px;
+        width: 31px;
+        top: 10px;
+        left: -2px;
+        transform: rotate(-40deg);
+      }
+      .topbar nav {
+        display: flex;
+        gap: 25px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .topbar nav a {
+        text-decoration: none;
+      }
+      .topbar nav a:hover {
+        color: var(--blue);
+      }
+      .tag {
+        font-size: 11px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 1fr;
+        gap: 45px;
+        align-items: center;
+        padding: 75px 0 62px;
+      }
+      .eyebrow {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        color: var(--blue);
+      }
+      .eyebrow:before {
+        content: "";
+        width: 22px;
+        height: 2px;
+        background: var(--blue);
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Space Grotesk", sans-serif;
+        line-height: 1.1;
+      }
+      h1 {
+        font-size: clamp(58px, 7.7vw, 98px);
+        letter-spacing: -6px;
+        margin: 23px 0;
+      }
+      h1 span {
+        color: var(--blue);
+      }
+      .intro {
+        max-width: 460px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+      .actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 30px;
+      }
+      .button {
+        border: 0;
+        background: var(--blue);
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        padding: 15px 22px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 13px;
+        border-radius: 4px;
+        transition:
+          transform 0.2s,
+          background 0.2s;
+      }
+      .button:hover {
+        background: #1936a8;
+        transform: translateY(-3px);
+      }
+      .button:active {
+        transform: scale(0.97);
+      }
+      .button.secondary {
+        background: transparent;
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .button.secondary:hover {
+        background: var(--lime);
+      }
+      .hero-note {
+        font-size: 11px;
+        color: var(--muted);
+        margin-top: 12px;
+      }
+      .visual {
+        height: 355px;
+        position: relative;
+        overflow: hidden;
+        background: var(--blue);
+        border-radius: 3px;
+        color: white;
+      }
+      .visual:before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(#ffffff09 1px, transparent 1px),
+          linear-gradient(90deg, #ffffff09 1px, transparent 1px);
+        background-size: 30px 30px;
+      }
+      .visual svg {
+        position: absolute;
+        inset: 35px 0;
+        width: 100%;
+        height: 290px;
+      }
+      .visual-label {
+        position: absolute;
+        top: 22px;
+        left: 24px;
+        opacity: 0.85;
+      }
+      .visual-footer {
+        position: absolute;
+        bottom: 20px;
+        left: 24px;
+        right: 24px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 11px;
+      }
+      .info-strip {
+        display: flex;
+        gap: 32px;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 20px 0;
+        font-size: 12px;
+      }
+      .info-strip span {
+        color: var(--muted);
+      }
+      .info-strip strong {
+        color: var(--ink);
+        margin-left: 6px;
+      }
+      .source-note {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 18px 0 0;
+        max-width: 900px;
+      }
+      .source-note a {
+        color: var(--blue);
+        text-underline-offset: 3px;
+      }
+      .document {
+        display: grid;
+        grid-template-columns: 175px minmax(0, 1fr);
+        gap: 50px;
+        padding: 65px 0;
+      }
+      aside nav {
+        position: sticky;
+        top: 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        font-size: 13px;
+      }
+      aside .tag {
+        margin-bottom: 10px;
+        color: var(--muted);
+      }
+      aside a {
+        text-decoration: none;
+        color: var(--muted);
+        border-left: 2px solid var(--line);
+        padding-left: 14px;
+      }
+      aside a:hover {
+        color: var(--blue);
+        border-color: var(--blue);
+      }
+      .section {
+        padding-bottom: 50px;
+        margin-bottom: 45px;
+        border-bottom: 1px solid var(--line);
+      }
+      .section:last-child {
+        margin-bottom: 0;
+      }
+      .section-heading {
+        display: flex;
+        align-items: baseline;
+        gap: 18px;
+        margin-bottom: 25px;
+      }
+      .number {
+        font-family: "Space Grotesk", sans-serif;
+        color: var(--blue);
+        font-size: 14px;
+      }
+      h2 {
+        font-size: clamp(28px, 4vw, 39px);
+        letter-spacing: -1.5px;
+        margin: 0;
+      }
+      h3 {
+        font-size: 20px;
+        letter-spacing: -0.5px;
+        margin: 28px 0 12px;
+      }
+      p {
+        margin: 12px 0;
+      }
+      .lead {
+        font-size: 17px;
+      }
+      .objectives {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px 25px;
+        padding: 0;
+        list-style: none;
+        margin: 25px 0 0;
+      }
+      .objectives li {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        font-size: 14px;
+      }
+      .check {
+        color: var(--blue);
+        font-weight: 700;
+      }
+      .definition {
+        border-left: 3px solid var(--blue);
+        padding: 8px 0 8px 20px;
+        margin: 22px 0;
+      }
+      .definition p {
+        margin: 0;
+      }
+      .experiment {
+        background: #e9ebdf;
+        padding: 23px 26px;
+        margin-top: 25px;
+      }
+      .experiment .tag {
+        color: var(--blue);
+      }
+      .experiment p {
+        font-size: 14px;
+      }
+      .experiment p:last-child {
+        margin-bottom: 0;
+      }
+      .diagram {
+        margin: 25px 0;
+        background: var(--white);
+        padding: 20px;
+        border-bottom: 2px solid var(--line);
+      }
+      .diagram svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        max-height: 190px;
+      }
+      .diagram figcaption {
+        font-size: 12px;
+        color: var(--muted);
+        text-align: center;
+        margin-top: 10px;
+      }
+      .formula {
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        letter-spacing: -0.5px;
+        color: var(--blue);
+        margin: 16px 0;
+      }
+      .formula small {
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--muted);
+        letter-spacing: 0;
+        display: block;
+      }
+      .remember {
+        background: var(--lime);
+        padding: 25px 28px;
+        margin-top: 28px;
+      }
+      .remember .tag {
+        display: block;
+        margin-bottom: 8px;
+      }
+      .remember p {
+        font-size: 14px;
+        margin: 5px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        margin-top: 24px;
+      }
+      th,
+      td {
+        padding: 14px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      th {
+        background: #e9ebdf;
+        font-size: 12px;
+      }
+      .exercise-intro {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+      }
+      .badge {
+        white-space: nowrap;
+        font-size: 11px;
+        padding: 6px 10px;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+      }
+      fieldset {
+        border: 0;
+        border-top: 1px solid var(--line);
+        padding: 22px 0 0;
+        margin: 25px 0;
+        min-width: 0;
+      }
+      legend {
+        padding: 0 12px 0 0;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .question {
+        font-size: 14px;
+      }
+      .options {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 14px;
+      }
+      .option {
+        display: flex;
+        gap: 9px;
+        align-items: center;
+        border: 1px solid var(--line);
+        padding: 9px 14px;
+        font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .option:hover,
+      .option:has(input:checked) {
+        background: #e4e8fb;
+        border-color: var(--blue);
+      }
+      input[type="radio"] {
+        accent-color: var(--blue);
+      }
+      .answer-input {
+        width: 150px;
+        border: 1px solid var(--line);
+        background: var(--white);
+        padding: 10px;
+        margin-right: 8px;
+        border-radius: 2px;
+      }
+      .feedback {
+        margin-top: 12px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .feedback.correct {
+        color: #226238;
+      }
+      .feedback.incorrect {
+        color: #a23c22;
+      }
+      .quiz-result {
+        margin-top: 18px;
+        padding: 15px 20px;
+        background: #e4e8fb;
+        font-weight: 600;
+      }
+      .writing {
+        font-size: 14px;
+      }
+      .answer-lines {
+        height: 66px;
+        background: repeating-linear-gradient(
+          transparent 0,
+          transparent 31px,
+          var(--line) 32px,
+          transparent 33px
+        );
+        margin-top: 12px;
+      }
+      details {
+        margin-top: 25px;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        padding: 18px 0;
+      }
+      summary {
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .correction {
+        font-size: 14px;
+        padding-top: 12px;
+      }
+      .correction li {
+        margin-bottom: 12px;
+      }
+      .pdf-banner {
+        background: var(--ink);
+        color: var(--white);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 30px;
+        padding: 32px 38px;
+        margin-bottom: 55px;
+      }
+      .pdf-banner h2 {
+        font-size: 25px;
+        letter-spacing: -0.8px;
+      }
+      .pdf-banner p {
+        font-size: 13px;
+        color: #c9cfd0;
+        margin-bottom: 0;
+      }
+      .pdf-banner .button {
+        background: var(--lime);
+        color: var(--ink);
+        flex-shrink: 0;
+      }
+      footer {
+        border-top: 1px solid var(--line);
+        padding: 24px 0;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      footer .wrap {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .reveal {
+        animation: appear 0.7s both;
+      }
+      .hero-copy {
+        animation-delay: 0.08s;
+      }
+      .visual {
+        animation-delay: 0.2s;
+      }
+      @keyframes appear {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .print-title {
+        display: none;
+      }
+      @media (max-width: 800px) {
+        .hero {
+          gap: 24px;
+          padding-top: 45px;
+          grid-template-columns: 1fr;
+        }
+        .visual {
+          height: 270px;
+        }
+        .visual svg {
+          height: 220px;
+          inset: 25px 0;
+        }
+        h1 {
+          letter-spacing: -4px;
+        }
+        .hero-copy {
+          max-width: 600px;
+        }
+        .document {
+          grid-template-columns: 1fr;
+          gap: 30px;
+          padding-top: 40px;
+        }
+        aside nav {
+          position: static;
+          flex-direction: row;
+          flex-wrap: wrap;
+          gap: 15px;
+        }
+        aside .tag {
+          display: none;
+        }
+        aside a {
+          font-size: 12px;
+        }
+        .pdf-banner {
+          padding: 25px;
+          align-items: flex-start;
+          flex-direction: column;
+        }
+      }
+      @media (max-width: 500px) {
+        .wrap {
+          width: calc(100% - 32px);
+        }
+        .topbar {
+          padding: 18px 0;
+        }
+        .topbar nav {
+          gap: 14px;
+        }
+        .topbar nav a:first-child {
+          display: none;
+        }
+        .brand {
+          font-size: 18px;
+        }
+        .info-strip {
+          gap: 12px;
+          flex-wrap: wrap;
+        }
+        .objectives {
+          grid-template-columns: 1fr;
+        }
+        .section-heading {
+          gap: 12px;
+        }
+        th,
+        td {
+          padding: 10px 7px;
+          font-size: 12px;
+        }
+        .exercise-intro {
+          align-items: flex-start;
+        }
+        footer .wrap {
+          flex-direction: column;
+          gap: 3px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *:before,
+        *:after {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+      @media print {
+        @page {
+          size: A4;
+          margin: 17mm;
+        }
+        body {
+          background: white;
+          color: #111;
+          font-size: 10pt;
+          line-height: 1.5;
+        }
+        .wrap {
+          width: 100%;
+          max-width: none;
+        }
+        header,
+        .hero,
+        .info-strip,
+        aside,
+        .pdf-banner,
+        footer,
+        .actions,
+        .quiz-result,
+        .feedback,
+        .no-print {
+          display: none !important;
+        }
+        .print-title {
+          display: block;
+          border-bottom: 2px solid #222;
+          padding-bottom: 15px;
+          margin-bottom: 20px;
+        }
+        .print-title h1 {
+          font-size: 32pt;
+          letter-spacing: -1.5px;
+          margin: 0 0 8px;
+          color: #111;
+        }
+        .print-title p {
+          margin: 4px 0;
+        }
+        .source-note {
+          font-size: 8pt;
+          margin-bottom: 20px;
+        }
+        .document {
+          display: block;
+          padding: 0;
+        }
+        .section {
+          margin: 0 0 22px;
+          padding-bottom: 20px;
+          break-inside: auto;
+        }
+        h2 {
+          font-size: 20pt;
+          letter-spacing: -0.5px;
+        }
+        h3 {
+          font-size: 13pt;
+        }
+        h2,
+        h3,
+        legend,
+        .section-heading {
+          break-after: avoid;
+        }
+        p,
+        .lead {
+          font-size: 10pt;
+        }
+        .definition,
+        .experiment,
+        .remember,
+        .diagram,
+        fieldset,
+        tr {
+          break-inside: avoid;
+        }
+        .experiment,
+        .remember {
+          background: #f0f0f0;
+          padding: 12px 16px;
+        }
+        .diagram {
+          padding: 10px;
+        }
+        .diagram svg {
+          max-height: 125px;
+        }
+        .options {
+          gap: 10px;
+        }
+        .option {
+          padding: 5px 9px;
+          font-size: 9pt;
+        }
+        input[type="radio"] {
+          appearance: none;
+          width: 10px;
+          height: 10px;
+          border: 1px solid #777;
+          border-radius: 50%;
+          margin: 0;
+        }
+        input[type="number"] {
+          color: transparent;
+          width: 110px;
+          padding: 5px;
+        }
+        .number,
+        .formula,
+        .tag,
+        .check {
+          color: #222;
+        }
+        details {
+          display: block;
+          break-before: page;
+          border: 0;
+        }
+        summary {
+          list-style: none;
+          font-size: 18pt;
+          font-family: "Space Grotesk", sans-serif;
+        }
+        summary::marker {
+          content: "";
+        }
+        .correction {
+          font-size: 10pt;
+        }
+        a {
+          color: inherit;
+          text-decoration: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap topbar">
+        <a class="brand" href="#" aria-label="Retour en haut"
+          ><span class="brand-symbol" aria-hidden="true"></span>Gamy exo et
+          lecon</a
+        >
+        <nav aria-label="Navigation principale">
+          <a href="#lecon">La leçon</a><a href="#exercices">Les exercices ↗</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <div class="eyebrow tag">Physique · Fiche de révision</div>
+          <h1 id="hero-title">Lumière<br /><span>& son.</span></h1>
+          <p class="intro">
+            Comprendre ce que l’on voit. Expliquer ce que l’on entend. Une leçon
+            claire, des expériences simples et des exercices pour s’entraîner.
+          </p>
+          <div class="actions">
+            <button class="button" type="button" data-print>
+              Enregistrer en PDF <span aria-hidden="true">↓</span>
+            </button>
+            <a class="button secondary" href="#lecon"
+              >Commencer la leçon <span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <p class="hero-note">
+            Leçon + exercices + corrigé, réunis dans un seul document.
+          </p>
+        </div>
+        <div
+          class="visual reveal"
+          role="img"
+          aria-label="Illustration : un rayon lumineux traverse un prisme et une onde sonore se propage."
+        >
+          <span class="visual-label tag"
+            >Deux phénomènes. Un monde à explorer.</span
+          >
+          <svg viewBox="0 0 480 290" fill="none" aria-hidden="true">
+            <path d="M-20 114H177" stroke="#fffef9" stroke-width="3" />
+            <path
+              d="M170 114L235 42L291 159Z"
+              fill="#fffef9"
+              fill-opacity=".12"
+              stroke="#fffef9"
+              stroke-width="2"
+            />
+            <path
+              d="M177 114L266 114L499 45"
+              stroke="#d6ed74"
+              stroke-width="3"
+            />
+            <path d="M266 114L499 81" stroke="#f4d976" stroke-width="3" />
+            <path d="M266 114L499 120" stroke="#ffa481" stroke-width="3" />
+            <path d="M266 114L499 159" stroke="#f6a7c6" stroke-width="3" />
+            <path d="M266 114L499 197" stroke="#b9d7ff" stroke-width="3" />
+            <path
+              d="M-10 230C10 230 10 200 30 200S50 260 70 260S90 200 110 200S130 260 150 260S170 200 190 200S210 260 230 260S250 200 270 200S290 260 310 260S330 200 350 200S370 260 390 260S410 200 430 200S450 260 470 260S490 230 510 230"
+              stroke="#d6ed74"
+              stroke-width="2"
+            />
+            <circle cx="110" cy="114" r="5" fill="#d6ed74" />
+          </svg>
+          <div class="visual-footer">
+            <span>01 / OPTIQUE</span><span>02 / ACOUSTIQUE</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="print-title">
+        <h1>Lumière & son</h1>
+        <p>
+          Physique — Leçon, exercices et corrigé · Niveau indicatif : collège
+        </p>
+        <p>
+          Nom : .................................................... Classe :
+          ................ Date : ................
+        </p>
+      </div>
+
+      <div class="info-strip">
+        <div><span>Niveau</span><strong>Collège</strong></div>
+        <div><span>Lecture</span><strong>15 min</strong></div>
+        <div><span>Entraînement</span><strong>6 exercices</strong></div>
+        <div><span>Format</span><strong>Un seul PDF</strong></div>
+      </div>
+      <p class="source-note">
+        À propos de la source : le contenu du
+        <a
+          href="http://mediatheque.accesmad.org/educmad/course/section.php?id=16973#module-52260"
+          target="_blank"
+          rel="noopener noreferrer"
+          >lien ACCESMAD fourni ↗</a
+        >
+        n’a pas pu être consulté. Cette fiche est une synthèse originale de
+        notions générales, et non une reproduction vérifiée de ce cours.
+      </p>
+
+      <div class="document">
+        <aside>
+          <nav aria-label="Sommaire de la fiche">
+            <span class="tag">Dans cette fiche</span>
+            <a href="#objectifs">01 — Objectifs</a>
+            <a href="#lecon">02 — La lumière</a>
+            <a href="#son">03 — Le son</a>
+            <a href="#synthese">04 — À comparer</a>
+            <a href="#exercices">05 — Exercices</a>
+            <a href="#corrige">06 — Corrigé</a>
+          </nav>
+        </aside>
+
+        <div>
+          <section class="section" id="objectifs">
+            <div class="section-heading">
+              <span class="number">01</span>
+              <h2>Ce que tu vas apprendre</h2>
+            </div>
+            <p class="lead">
+              La lumière et le son transportent de l’énergie et de
+              l’information. Mais ils ne se propagent pas de la même manière.
+            </p>
+            <ul class="objectives">
+              <li>
+                <span class="check">↗</span> Distinguer une source lumineuse
+                d’un objet diffusant.
+              </li>
+              <li>
+                <span class="check">↗</span> Expliquer la formation d’une ombre.
+              </li>
+              <li>
+                <span class="check">↗</span> Relier un son à une vibration.
+              </li>
+              <li>
+                <span class="check">↗</span> Calculer une distance avec une
+                vitesse et une durée.
+              </li>
+            </ul>
+          </section>
+
+          <section class="section" id="lecon">
+            <div class="section-heading">
+              <span class="number">02</span>
+              <h2>La lumière : voir et éclairer</h2>
+            </div>
+            <h3>Sources et objets éclairés</h3>
+            <p>
+              Une <strong>source primaire</strong> produit sa propre lumière :
+              le Soleil, une lampe allumée ou une flamme. Un
+              <strong>objet diffusant</strong> renvoie une partie de la lumière
+              qu’il reçoit : la Lune, un livre ou un mur éclairé.
+            </p>
+            <div class="definition">
+              <p>
+                Pour voir un objet, de la lumière provenant de cet objet doit
+                <strong>entrer dans nos yeux</strong>. Nos yeux ne projettent
+                pas de rayons lumineux vers lui.
+              </p>
+            </div>
+            <h3>Comment se propage-t-elle ?</h3>
+            <p>
+              Dans un milieu transparent et homogène, la lumière se propage
+              <strong>en ligne droite</strong>. On représente son trajet par un
+              rayon, tracé avec une flèche indiquant son sens de propagation.
+              Elle peut traverser le vide.
+            </p>
+            <div class="formula">
+              c ≈ 300 000 km/s<small
+                >Vitesse de la lumière dans le vide, soit 3 × 10⁸ m/s.</small
+              >
+            </div>
+            <figure class="diagram">
+              <svg
+                viewBox="0 0 640 160"
+                role="img"
+                aria-label="Une source lumineuse éclaire un objet opaque. Une zone d’ombre se forme derrière lui sur un écran."
+              >
+                <path d="M65 80L540 5V155Z" fill="#e9ecfb" />
+                <path
+                  d="M65 80L540 5M65 80L540 155"
+                  stroke="#244ad7"
+                  stroke-width="2"
+                />
+                <path
+                  d="M265 48L540 5V155L265 112Z"
+                  fill="#202b35"
+                  fill-opacity=".17"
+                />
+                <circle cx="65" cy="80" r="13" fill="#244ad7" />
+                <rect
+                  x="258"
+                  y="48"
+                  width="14"
+                  height="64"
+                  rx="2"
+                  fill="#202b35"
+                />
+                <path d="M540 4V156" stroke="#202b35" stroke-width="5" />
+                <text
+                  x="15"
+                  y="135"
+                  font-size="13"
+                  fill="#202b35"
+                  font-family="DM Sans, sans-serif"
+                >
+                  Source
+                </text>
+                <text
+                  x="212"
+                  y="145"
+                  font-size="13"
+                  fill="#202b35"
+                  font-family="DM Sans, sans-serif"
+                >
+                  Objet opaque
+                </text>
+                <text
+                  x="340"
+                  y="86"
+                  font-size="13"
+                  fill="#202b35"
+                  font-family="DM Sans, sans-serif"
+                >
+                  Zone d’ombre
+                </text>
+                <text
+                  x="555"
+                  y="86"
+                  font-size="13"
+                  fill="#202b35"
+                  font-family="DM Sans, sans-serif"
+                >
+                  Écran
+                </text>
+              </svg>
+              <figcaption>
+                Avec une source ponctuelle, l’objet opaque bloque une partie des
+                rayons.
+              </figcaption>
+            </figure>
+            <h3>Transparence, ombre et couleurs</h3>
+            <p>
+              Un milieu <strong>transparent</strong> laisse passer la lumière et
+              permet de voir nettement à travers. Un milieu
+              <strong>translucide</strong> la laisse passer sans permettre une
+              vision nette. Un objet <strong>opaque</strong> ne la laisse pas
+              traverser : il peut former une ombre.
+            </p>
+            <p>
+              La lumière peut être renvoyée par une surface : c’est la
+              <strong>réflexion</strong>. Elle peut changer de direction en
+              passant d’un milieu transparent à un autre : c’est la
+              <strong>réfraction</strong>. Un prisme décompose la lumière
+              blanche en différentes couleurs : c’est la dispersion.
+            </p>
+            <div class="experiment">
+              <span class="tag">Petite expérience · 3 minutes</span>
+              <p>
+                Dans une pièce peu éclairée, dirige une lampe de poche vers un
+                mur. Place un objet opaque entre les deux et déplace-le :
+                observe comment la taille de son ombre change.
+              </p>
+              <p>
+                <strong>Sécurité :</strong> ne regarde jamais directement le
+                Soleil et ne dirige pas de laser vers les yeux.
+              </p>
+            </div>
+          </section>
+
+          <section class="section" id="son">
+            <div class="section-heading">
+              <span class="number">03</span>
+              <h2>Le son : une vibration qui voyage</h2>
+            </div>
+            <p>
+              Un son est produit par un <strong>objet qui vibre</strong> : une
+              corde de guitare, une membrane de haut-parleur ou les cordes
+              vocales. Cette vibration se transmet de proche en proche dans un
+              milieu matériel.
+            </p>
+            <div class="definition">
+              <p>
+                Le son se propage dans les gaz, les liquides et les solides,
+                mais <strong>pas dans le vide</strong>. Dans l’air, il
+                correspond à des variations de pression.
+              </p>
+            </div>
+            <div class="formula">
+              v ≈ 340 m/s<small
+                >Vitesse du son dans l’air vers 20 °C ; elle dépend du milieu et
+                de la température.</small
+              >
+            </div>
+            <h3>Aigu, grave, fort ou faible ?</h3>
+            <p>
+              La <strong>fréquence</strong>, exprimée en hertz (Hz), indique le
+              nombre de vibrations par seconde. Plus elle est élevée, plus le
+              son est <strong>aigu</strong> ; plus elle est faible, plus le son
+              est <strong>grave</strong>.
+            </p>
+            <p>
+              L’amplitude de la vibration est liée à l’intensité sonore. Le
+              <strong>niveau sonore</strong> s’exprime en décibels (dB). Un son
+              fort n’est pas forcément aigu : la hauteur et le niveau sonore
+              sont deux caractéristiques différentes.
+            </p>
+            <p>
+              L’oreille humaine jeune perçoit généralement des fréquences
+              comprises entre <strong>20 Hz et 20 000 Hz</strong>. En dessous,
+              on parle d’infrasons ; au-dessus, d’ultrasons.
+            </p>
+            <h3>Mesurer une distance</h3>
+            <div class="formula">
+              d = v × t<small
+                >d : distance en mètres · v : vitesse en m/s · t : durée en
+                secondes.</small
+              >
+            </div>
+            <p>
+              Un écho apparaît lorsque le son est réfléchi par un obstacle. Si
+              la durée mesurée correspond à l’aller-retour du son, la distance
+              jusqu’à l’obstacle vaut <strong>d = v × t ÷ 2</strong>.
+            </p>
+            <div class="experiment">
+              <span class="tag">Petite expérience · 2 minutes</span>
+              <p>
+                Pose doucement deux doigts sur ta gorge et prononce un « mmm ».
+                Tu sens tes cordes vocales vibrer. Compare ensuite un son grave
+                et un son aigu.
+              </p>
+              <p>
+                <strong>Prévention :</strong> évite les volumes élevés et fais
+                des pauses lorsque tu utilises des écouteurs.
+              </p>
+            </div>
+            <div class="remember">
+              <span class="tag">Le lien avec le quotidien</span>
+              <p>
+                On voit l’éclair avant d’entendre le tonnerre, car la lumière se
+                propage beaucoup plus vite que le son. Si le tonnerre arrive 3
+                secondes après l’éclair, l’orage est à environ 1 km.
+              </p>
+            </div>
+          </section>
+
+          <section class="section" id="synthese">
+            <div class="section-heading">
+              <span class="number">04</span>
+              <h2>À ne pas confondre</h2>
+            </div>
+            <table>
+              <caption
+                class="tag"
+                style="text-align: left; margin-bottom: 12px"
+              >
+                Les différences essentielles
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col">Caractéristique</th>
+                  <th scope="col">Lumière</th>
+                  <th scope="col">Son</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Nature</th>
+                  <td>Onde électromagnétique</td>
+                  <td>Onde mécanique</td>
+                </tr>
+                <tr>
+                  <th scope="row">Dans le vide</th>
+                  <td>Se propage</td>
+                  <td>Ne se propage pas</td>
+                </tr>
+                <tr>
+                  <th scope="row">Vitesse indicative</th>
+                  <td>3 × 10⁸ m/s dans le vide</td>
+                  <td>340 m/s dans l’air à 20 °C</td>
+                </tr>
+                <tr>
+                  <th scope="row">Réflexion</th>
+                  <td>Exemple : un miroir</td>
+                  <td>Exemple : un écho</td>
+                </tr>
+                <tr>
+                  <th scope="row">Perception</th>
+                  <td>Par les yeux</td>
+                  <td>Par les oreilles</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section" id="exercices">
+            <div class="section-heading">
+              <span class="number">05</span>
+              <h2>À toi de jouer</h2>
+            </div>
+            <div class="exercise-intro">
+              <p>Teste tes connaissances, puis justifie tes réponses.</p>
+              <span class="badge">6 exercices · 15 min</span>
+            </div>
+            <form id="quiz">
+              <fieldset>
+                <legend>Exercice 1 — Les sources lumineuses</legend>
+                <p class="question">
+                  Lequel de ces objets est une source primaire de lumière ?
+                </p>
+                <div class="options">
+                  <label class="option"
+                    ><input type="radio" name="q1" value="lune" /> La
+                    Lune</label
+                  >
+                  <label class="option"
+                    ><input type="radio" name="q1" value="lampe" /> Une lampe
+                    allumée</label
+                  >
+                  <label class="option"
+                    ><input type="radio" name="q1" value="miroir" /> Un
+                    miroir</label
+                  >
+                </div>
+                <p class="feedback" id="f1" aria-live="polite"></p>
+              </fieldset>
+              <fieldset>
+                <legend>Exercice 2 — Le son dans l’espace</legend>
+                <p class="question">
+                  Le son peut se propager dans le vide. Vrai ou faux ?
+                </p>
+                <div class="options">
+                  <label class="option"
+                    ><input type="radio" name="q2" value="vrai" /> Vrai</label
+                  >
+                  <label class="option"
+                    ><input type="radio" name="q2" value="faux" /> Faux</label
+                  >
+                </div>
+                <p class="feedback" id="f2" aria-live="polite"></p>
+              </fieldset>
+              <fieldset>
+                <legend>Exercice 3 — La hauteur d’un son</legend>
+                <p class="question">Quel son est le plus aigu ?</p>
+                <div class="options">
+                  <label class="option"
+                    ><input type="radio" name="q3" value="100" /> Un son de 100
+                    Hz</label
+                  >
+                  <label class="option"
+                    ><input type="radio" name="q3" value="1000" /> Un son de 1
+                    000 Hz</label
+                  >
+                </div>
+                <p class="feedback" id="f3" aria-live="polite"></p>
+              </fieldset>
+              <fieldset>
+                <legend>Exercice 4 — L’éclair et le tonnerre</legend>
+                <p class="question">
+                  Tu entends le tonnerre 5 s après avoir vu l’éclair. Avec v =
+                  340 m/s et en négligeant le temps de trajet de la lumière,
+                  quelle est la distance de l’orage ?
+                </p>
+                <label for="q4" class="question">Distance : </label
+                ><input
+                  class="answer-input"
+                  id="q4"
+                  name="q4"
+                  type="number"
+                  min="0"
+                  step="any"
+                  placeholder="Ta réponse"
+                /><span>m</span>
+                <p class="feedback" id="f4" aria-live="polite"></p>
+                <div class="answer-lines" aria-hidden="true"></div>
+              </fieldset>
+              <fieldset>
+                <legend>Exercice 5 — Le retour de l’écho</legend>
+                <p class="question">
+                  Un écho revient 0,8 s après un cri. Avec v = 340 m/s, à quelle
+                  distance se trouve la paroi qui réfléchit le son ? Attention :
+                  le son fait un aller-retour.
+                </p>
+                <label for="q5" class="question">Distance : </label
+                ><input
+                  class="answer-input"
+                  id="q5"
+                  name="q5"
+                  type="number"
+                  min="0"
+                  step="any"
+                  placeholder="Ta réponse"
+                /><span>m</span>
+                <p class="feedback" id="f5" aria-live="polite"></p>
+                <div class="answer-lines" aria-hidden="true"></div>
+              </fieldset>
+              <div class="actions no-print">
+                <button class="button" type="submit">
+                  Vérifier mes 5 réponses <span aria-hidden="true">↗</span>
+                </button>
+                <button class="button secondary" type="reset">
+                  Recommencer
+                </button>
+              </div>
+              <div
+                id="quiz-result"
+                class="quiz-result"
+                role="status"
+                hidden
+              ></div>
+            </form>
+            <fieldset>
+              <legend>Exercice 6 — Expliquer une ombre</legend>
+              <p class="writing">
+                Une lampe éclaire un mur. Tu places un livre entre la lampe et
+                le mur. Explique pourquoi une ombre apparaît en utilisant les
+                mots <strong>opaque</strong>, <strong>lumière</strong> et
+                <strong>ligne droite</strong>.
+              </p>
+              <div class="answer-lines" aria-hidden="true"></div>
+              <p class="no-print" style="font-size: 12px; color: var(--muted)">
+                Réponse à rédiger sur papier. Compare ensuite avec le corrigé.
+              </p>
+            </fieldset>
+            <details id="corrige">
+              <summary>06 — Consulter le corrigé</summary>
+              <div class="correction">
+                <ol>
+                  <li>
+                    <strong>Une lampe allumée.</strong> Elle produit sa propre
+                    lumière. La Lune et le miroir renvoient de la lumière reçue.
+                  </li>
+                  <li>
+                    <strong>Faux.</strong> Le son a besoin d’un milieu matériel
+                    pour se propager.
+                  </li>
+                  <li>
+                    <strong>Le son de 1 000 Hz.</strong> Une fréquence plus
+                    élevée correspond à un son plus aigu.
+                  </li>
+                  <li>
+                    <strong>1 700 m, soit 1,7 km.</strong> d = v × t = 340 × 5 =
+                    1 700 m.
+                  </li>
+                  <li>
+                    <strong>136 m.</strong> La durée de 0,8 s comprend l’aller
+                    et le retour : d = 340 × 0,8 ÷ 2 = 136 m.
+                  </li>
+                  <li>
+                    <strong>Exemple de réponse :</strong> le livre est opaque :
+                    il ne laisse pas passer la lumière. Comme la lumière se
+                    propage en ligne droite dans l’air homogène, le livre bloque
+                    certains rayons. La zone du mur qui ne reçoit pas
+                    directement la lumière de la lampe forme l’ombre portée.
+                  </li>
+                </ol>
+              </div>
+            </details>
+          </section>
+        </div>
+      </div>
+
+      <section class="pdf-banner" aria-labelledby="pdf-title">
+        <div>
+          <h2 id="pdf-title">Toute la fiche. Un seul PDF.</h2>
+          <p>
+            Dans la fenêtre d’impression, choisis « Enregistrer au format PDF
+            ».<br />La leçon, les exercices et le corrigé seront inclus.
+          </p>
+        </div>
+        <button class="button" type="button" data-print>
+          Créer mon PDF <span aria-hidden="true">↓</span>
+        </button>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <span>le labo. / Comprendre, expérimenter, retenir.</span
+        ><span>Fiche pédagogique · Lumière & son</span>
+      </div>
+    </footer>
+
+    <script>
+      const quiz = document.getElementById("quiz");
+      const result = document.getElementById("quiz-result");
+      const solutions = ["lampe", "faux", "1000", 1700, 136];
+      const explanations = [
+        "Une lampe allumée produit sa propre lumière.",
+        "Le son ne se propage pas dans le vide.",
+        "1 000 Hz : plus la fréquence augmente, plus le son est aigu.",
+        "340 × 5 = 1 700 m.",
+        "340 × 0,8 ÷ 2 = 136 m : il faut compter l’aller-retour.",
+      ];
+
+      quiz.addEventListener("submit", function (event) {
+        event.preventDefault();
+        const data = new FormData(quiz);
+        let score = 0;
+        for (let i = 0; i < solutions.length; i++) {
+          const value = data.get("q" + (i + 1));
+          const answered = value !== null && value !== "";
+          const correct =
+            answered &&
+            (i < 3
+              ? value === solutions[i]
+              : Math.abs(Number(value) - solutions[i]) < 0.01);
+          if (correct) score++;
+          const feedback = document.getElementById("f" + (i + 1));
+          feedback.className =
+            "feedback " + (correct ? "correct" : "incorrect");
+          feedback.textContent =
+            (correct
+              ? "✓ Bien joué ! "
+              : answered
+                ? "↗ À revoir. "
+                : "↗ Réponse manquante. ") + explanations[i];
+        }
+        result.hidden = false;
+        result.textContent =
+          score +
+          " / 5 — " +
+          (score === 5
+            ? "Excellent ! Passe maintenant à la réponse rédigée."
+            : "Relis les explications et essaie à nouveau. Tu progresses !");
+      });
+
+      quiz.addEventListener("reset", function () {
+        result.hidden = true;
+        document.querySelectorAll(".feedback").forEach((el) => {
+          el.textContent = "";
+          el.className = "feedback";
+        });
+      });
+
+      const corrections = document.getElementById("corrige");
+      let previousOpen = false;
+      window.addEventListener("beforeprint", () => {
+        previousOpen = corrections.open;
+        corrections.open = true;
+      });
+      window.addEventListener("afterprint", () => {
+        corrections.open = previousOpen;
+      });
+      document.querySelectorAll("[data-print]").forEach((button) => {
+        button.addEventListener("click", () => window.print());
+      });
+    </script>
+  </body>
+</html>
